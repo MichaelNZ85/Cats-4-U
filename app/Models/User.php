@@ -4,9 +4,23 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property Carbon $email_verified_at
+ * @property string $password
+ * @property string $remember_token
+ * @property string $given_name
+ * @property string $surname
+ * @property string $phone_number
+ * @property int $address_id
+ * @property Carbon $created_at
+ * @property Carbon $created_at
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -43,5 +57,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function address(): MorphOne
+    {
+        return $this->morphOne(Address::class, 'owner');
+    }
+
+    public function reantalOrders()
+    {
+        return $this->hasMany(RentalOrder::class);
     }
 }
