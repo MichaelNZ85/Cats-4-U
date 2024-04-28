@@ -1,116 +1,88 @@
-import { useEffect, FormEventHandler } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect, FormEventHandler, useState } from 'react';
+import GuestLayout from '@/Layouts/GuestLayout/GuestLayout';
+import { TextField, Box, Card, Checkbox, Typography, FormControlLabel, FormGroup } from '@mui/material';
+import { Head, Link, router } from '@inertiajs/react';
+import { useForm } from 'react-hook-form';
+import Button from '@/Components/Button/Button';
+import { LogoCard } from '@/Components/LogoCard/LogoCard';
 
-export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-    });
+type RegisterData = {
+    email: string,
+    password: string,
+    remember: boolean
+}
 
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
+export default function Register({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors }
+    } = useForm<RegisterData>();
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
+    const [submitting, setSubmitting] = useState(false);
 
-        post(route('register'));
-    };
+    const submit = handleSubmit((data) => {
+        setSubmitting(true);
+        router.post(route('Register'), data, {
+            onError: (e) => {
+                if (e.email) {
+                    setError('email', { type: "server", message: e.email })
+                }
+            },
+            onFinish: () => {
+                setSubmitting(false)
+            }
+        })
+    })
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title="Log in" />
 
             <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.name} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
-                </div>
+                <LogoCard>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, justifyContent: 'space-between' }}>
+                        <Box>
+                            <TextField
+                                size="small"
+                                {...register("email")}
+                                label="Email"
+                                fullWidth
+                            />
+                            {errors.email && <Typography sx={{ color: 'red', fontSize: '0.8rem', }} className="text mt1">{errors.email.message}</Typography>}
+                        </Box>
+                        <Box>
+                            <TextField
+                                size="small"
+                                type="password"
+                                label="Password"
+                                {...register("password")}
+                                fullWidth
+                            />
+                        </Box>
+                        <Box>
+                            <FormGroup>
+                                <FormControlLabel control={<Checkbox {...register("remember")} />} label="Remember me?" />
+                            </FormGroup>
+                        </Box>
+                        <Box>
+                            {canResetPassword && (
+                                <Link
+                                    href={route('password.request')}
+                                    className="link-text"
+                                >
+                                    {/* <Typography variant="body1" className="link-text"> */}
+                                    Forgot your password?
+                                    {/* </Typography> */}
+                                </Link>
+                            )}
+                        </Box>
+                        <Button type="submit" colour={"#D18800"} textcolour="#ffffff" variant="contained" disabled={submitting} fullWidth>
+                            Log In
+                        </Button>
+                    </Box>
+                </LogoCard>
             </form>
         </GuestLayout>
     );

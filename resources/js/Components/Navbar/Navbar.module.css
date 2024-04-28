@@ -1,22 +1,31 @@
+@import '../../../css/colours.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 /* Navbar container */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #f0f0f0; /* Change as needed */
+    background-color: #fff;
+    box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.1);
   }
   
   /* Brand logo */
   .navbarBrand img {
-    width: 100px; /* Adjust as needed */
+    height: 70px !important; /* Adjust as needed */
   }
   
+  .header {
+    color: #fff;
+  }
+
   /* Links */
   .navbarLinks a {
     margin-right: 1rem;
     text-decoration: none;
-    color: #333; /* Change as needed */
+    color: var(--primary-color); /* Change as needed */
+    font-family: "Inter", serif;
   }
   
   /* Dropdown */

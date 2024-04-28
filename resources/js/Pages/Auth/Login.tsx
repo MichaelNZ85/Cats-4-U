@@ -1,96 +1,88 @@
-import { useEffect, FormEventHandler } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect, FormEventHandler, useState } from 'react';
+import GuestLayout from '@/Layouts/GuestLayout/GuestLayout';
+import { TextField, Box, Card, Checkbox, Typography, FormControlLabel, FormGroup } from '@mui/material';
+import { Head, Link, router } from '@inertiajs/react';
+import { useForm } from 'react-hook-form';
+import Button from '@/Components/Button/Button';
+import { LogoCard } from '@/Components/LogoCard/LogoCard';
+
+type LoginData = {
+    email: string,
+    password: string,
+    remember: boolean
+}
 
 export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: false,
-    });
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors }
+    } = useForm<LoginData>();
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
+    const [submitting, setSubmitting] = useState(false);
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-
-        post(route('login'));
-    };
+    const submit = handleSubmit((data) => {
+        setSubmitting(true);
+        router.post(route('login'), data, {
+            onError: (e) => {
+                if (e.email) {
+                    setError('email', { type: "server", message: e.email })
+                }
+            },
+            onFinish: () => {
+                setSubmitting(false)
+            }
+        })
+    })
 
     return (
         <GuestLayout>
             <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
             <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
-                        />
-                        <span className="ms-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
-                </div>
+                <LogoCard>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, justifyContent: 'space-between' }}>
+                        <Box>
+                            <TextField
+                                size="small"
+                                {...register("email")}
+                                label="Email"
+                                fullWidth
+                            />
+                            {errors.email && <Typography sx={{ color: 'red', fontSize: '0.8rem', }} className="text mt1">{errors.email.message}</Typography>}
+                        </Box>
+                        <Box>
+                            <TextField
+                                size="small"
+                                type="password"
+                                label="Password"
+                                {...register("password")}
+                                fullWidth
+                            />
+                        </Box>
+                        <Box>
+                            <FormGroup>
+                                <FormControlLabel control={<Checkbox {...register("remember")} />} label="Remember me?" />
+                            </FormGroup>
+                        </Box>
+                        <Box>
+                            {canResetPassword && (
+                                <Link
+                                    href={route('password.request')}
+                                    className="link-text"
+                                >
+                                    {/* <Typography variant="body1" className="link-text"> */}
+                                    Forgot your password?
+                                    {/* </Typography> */}
+                                </Link>
+                            )}
+                        </Box>
+                        <Button type="submit" colour={"#D18800"} textcolour="#ffffff" variant="contained" disabled={submitting} fullWidth>
+                            Log In
+                        </Button>
+                    </Box>
+                </LogoCard>
             </form>
         </GuestLayout>
     );

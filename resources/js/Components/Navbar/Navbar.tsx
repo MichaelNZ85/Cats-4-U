@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Navbar.module.css'; // Import CSS Modules
 import { Typography } from '@mui/material';
+import { Link, usePage } from '@inertiajs/react'
+
 
 const Navbar = () => {
-    // State for managing dropdown visibility
+    // State for managing dropdown visibility∏
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     // Function to toggle dropdown visibility
@@ -12,27 +14,27 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={styles.navbar}> {/* Use CSS Modules class */}
+        <nav className={styles.navbar}>
             {/* Brand logo */}
-            <div className={styles.navbarBrand}> {/* Use CSS Modules class */}
-                <Typography variant="h3">Big purrs</Typography>
+            <div className={styles.navbarBrand}>
+                <img src="/assets/img/CatLogo-2.svg" />
             </div>
 
             {/* Links */}
-            <div className={styles.navbarLinks}> {/* Use CSS Modules class */}
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/services">Services</a>
-                <a href="/contact">Contact</a>
+            <div className={styles.navbarLinks}>
+                <Link href="/">Home</Link>
+                <Link href="/about">About</Link>
+                <Link href="/services">Services</Link>
+                <Link href="/contact">Contact</Link>
             </div>
 
             {/* Dropdown menu */}
-            <div className={styles.dropdown}> {/* Use CSS Modules class */}
+            <div className={styles.dropdown}>
                 <button className={styles.dropdownToggle} onClick={toggleDropdown}>
                     Menu
                 </button>
                 {dropdownOpen && (
-                    <div className={`${styles.dropdownMenu} ${styles.dropdownMenuActive}`}> {/* Use CSS Modules class */}
+                    <div className={`${styles.dropdownMenu} ${styles.dropdownMenuActive}`}>
                         <a href="/profile">Profile</a>
                         <a href="/settings">Settings</a>
                         <a href="/logout">Logout</a>

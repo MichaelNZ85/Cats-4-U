@@ -8,9 +8,21 @@ import '@fontsource/roboto/700.css';
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ThemeProvider, createTheme, PaletteColor, SimplePaletteColorOptions } from "@mui/material/styles";
 
+declare module "@mui/material/styles" {
+    interface Palette { }
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+    interface PaletteOptions { }
+}
+
+const theme = createTheme({
+    palette: {
+        primary: { main: "#ffda17" }
+    }
+})
+
+const appName = import.meta.env.VITE_APP_NAME || 'Cats 4 U';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
