@@ -24,7 +24,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
 
     const submit = handleSubmit((data) => {
         setSubmitting(true);
-        router.post(route('login'), data, {
+        router.post(route('login.store'), data, {
             onError: (e) => {
                 if (e.email) {
                     setError('email', { type: "server", message: e.email })
