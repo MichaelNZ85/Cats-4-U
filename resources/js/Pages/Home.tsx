@@ -11,6 +11,7 @@ export default function Home() {
                     <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
                         {/* <img src={'assets/img/cats4ulogo-whitebg.png'} /> */}
                         <Typography variant="h3">Meow from the puddy</Typography>
+                        {/* <Button href={route('')}></Button> */}
                     </Box>
                 </Box>
             </MainLayout>

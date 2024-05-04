@@ -11,9 +11,9 @@ export default defineConfig({
         }),
         react(),
     ],
-    // resolve: {
-    //     alias: {
-    //         "@": path.resolve(__dirname, './resources/js/')
-    //     }
-    // }
+    resolve: {
+        alias: {
+            "@css": path.resolve(__dirname, './resources/css/')
+        }
+    }
 });

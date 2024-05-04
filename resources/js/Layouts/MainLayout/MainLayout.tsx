@@ -8,7 +8,9 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     return (
         <Box className={styles.root}>
             <Navbar />
-            {children}
+            <Box sx={{ marginY: 3 }}>
+                {children}
+            </Box>
         </Box>
     )
 }

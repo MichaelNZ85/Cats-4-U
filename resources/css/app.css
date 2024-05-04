@@ -1,5 +1,9 @@
 @import './colours.css';
 
+body {
+    font-family: "Inter", sans-serif;
+}
+
 .app-root {
     height: 100dvh;
     width: 100dvw;

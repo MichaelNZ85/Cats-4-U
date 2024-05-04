@@ -27,6 +27,7 @@
         "@fontsource/roboto": "^5.0.12",
         "@mui/icons-material": "^5.15.15",
         "@mui/material": "^5.15.15",
+        "@phosphor-icons/react": "^2.1.5",
         "@types/lodash": "^4.17.0",
         "lodash": "^4.17.21",
         "react-hook-form": "^7.51.3"

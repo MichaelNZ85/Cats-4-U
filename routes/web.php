@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\CatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('/cats')->group(function () {
+    Route::get('/', [CatController::class, 'index'])->name('cats.index');
+    Route::get('/{cat}', [CatController::class, 'show'])->name('cats.show');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cat;
+use App\Services\CatService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class CatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(CatService $service): Response
     {
-        //
+        return Inertia::render('Cats/Index', [
+            'cats' => $service->getAvailableCats(),
+        ]);
     }
 
     /**
@@ -36,7 +41,9 @@ class CatController extends Controller
      */
     public function show(Cat $cat)
     {
-        //
+        return Inertia::render('Cats/Show', [
+            'cat' => $cat
+        ]);
     }
 
     /**

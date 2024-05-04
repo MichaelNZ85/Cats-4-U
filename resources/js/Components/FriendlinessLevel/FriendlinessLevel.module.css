@@ -1,0 +1,6 @@
+@import '@css/colours.css';
+
+
+.star {
+    color: var(--yellow-color)
+}

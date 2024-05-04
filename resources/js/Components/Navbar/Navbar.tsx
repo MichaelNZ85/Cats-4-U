@@ -4,6 +4,7 @@ import { Typography } from '@mui/material';
 import { Link, usePage } from '@inertiajs/react'
 
 
+
 const Navbar = () => {
     // State for managing dropdown visibility∏
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,15 +16,13 @@ const Navbar = () => {
 
     return (
         <nav className={styles.navbar}>
-            {/* Brand logo */}
             <div className={styles.navbarBrand}>
                 <img src="/assets/img/CatLogo-2.svg" />
             </div>
 
-            {/* Links */}
             <div className={styles.navbarLinks}>
-                <Link href="/">Home</Link>
-                <Link href="/about">About</Link>
+                <Link href={route('home')}>Home</Link>
+                <Link href={route('cats.index')}>Cats</Link>
                 <Link href="/services">Services</Link>
                 <Link href="/contact">Contact</Link>
             </div>

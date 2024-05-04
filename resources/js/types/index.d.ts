@@ -14,3 +14,16 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 export interface ErrorResponse {
     [key: string]: string;
 }
+
+export interface Cat {
+    id: number;
+    name: string;
+    breed: string;
+    friendliness_level: number;
+    suitable_for: string;
+    description: string;
+    has_owner: boolean;
+    owner_id: null;
+    image: string;
+    area: string;
+}

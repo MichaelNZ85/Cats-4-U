@@ -12,7 +12,7 @@ type LoginData = {
     remember: boolean
 }
 
-export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
+export default function Login({ canResetPassword }: { canResetPassword: boolean }) {
     const {
         register,
         handleSubmit,
