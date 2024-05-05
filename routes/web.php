@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
+Route::get('/file', [FileUploadController::class, 'show']);
+Route::post('/file', [FileUploadController::class, 'upload'])->name('file.upload');
 Route::prefix('/cats')->group(function () {
     Route::get('/', [CatController::class, 'index'])->name('cats.index');
     Route::get('/{cat}', [CatController::class, 'show'])->name('cats.show');
