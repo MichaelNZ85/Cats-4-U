@@ -15,7 +15,8 @@ class CatController extends Controller
      */
     public function index(CatService $service): Response
     {
-        return Inertia::render('Cats/Index', [
+            $meow = "Big purrs";
+	     return Inertia::render('Cats/Index', [
             'cats' => $service->getAvailableCats(),
         ]);
     }
