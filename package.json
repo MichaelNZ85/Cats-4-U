@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build"
+        "build": "tsc && vite build",
+        "build-ignore-errors": "tsc --noEmit && eslint . --ext .ts,.tsx --quiet && vite build"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
