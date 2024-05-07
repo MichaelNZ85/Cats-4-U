@@ -25,7 +25,7 @@ class CatResource extends Resource
 {
     protected static ?string $model = Cat::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'icon-kitty';
 
     public static function form(Form $form): Form
     {
