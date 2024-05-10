@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('friendliness_level')->default(1);
             $table->string('suitable_for');
             $table->text('description');
-            $table->boolean('has_owner');
-            $table->foreignId('owner_id')->nullable();
+            $table->string('area');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

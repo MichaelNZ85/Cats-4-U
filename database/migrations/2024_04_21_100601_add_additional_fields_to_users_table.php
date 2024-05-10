@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('given_name');
             $table->string('surname');
             $table->string('phone_number');
+            $table->boolean('is_admin')->default(false);
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->dropColumn('given_name');
             $table->dropColumn('surname');
             $table->dropColumn('phone_number');
+            $table->dropColumn('is_admin');
         });
     }
 };
