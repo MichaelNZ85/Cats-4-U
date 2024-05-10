@@ -14,7 +14,7 @@ export default function ShowCatPage({ cat }: { cat: Cat }) {
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     return (
         <>
-            <Head title="Available Cats" />
+            <Head title={cat.name} />
             <MainLayout>
                 <Container sx={{ display: 'flex', flexDirection: 'column', width: '100dvw', alignItems: 'center', }}>
                     <img src={cat.image?.startsWith('https://') ? cat.image : `${baseUrl}/storage/${cat.image}`} className={isMobile ? styles.catImgMobile : styles.catImg} />

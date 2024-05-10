@@ -3,8 +3,6 @@ import styles from './Navbar.module.css'; // Import CSS Modules
 import { Typography } from '@mui/material';
 import { Link, usePage } from '@inertiajs/react'
 
-
-
 const Navbar = () => {
     // State for managing dropdown visibility∏
     const [dropdownOpen, setDropdownOpen] = useState(false);

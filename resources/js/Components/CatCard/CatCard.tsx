@@ -26,7 +26,7 @@ export default function CatCard({ cat }: { cat: Cat }) {
                             {cat.area}
                         </Typography>
                     </Box>
-                    <FriendlinessLevel friendlinessLevel={cat.friendliness_level} />
+                    <FriendlinessLevel friendlinessLevel={cat.friendliness_level} showHeader={true} />
                 </Box>
             </CardContent>
         </Card>
