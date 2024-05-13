@@ -1,12 +1,15 @@
 import MainLayout from "@/Layouts/MainLayout/MainLayout";
-import { Cat } from "@/types";
+import { Cat, ScheduleStatus } from "@/types";
 import { capitalize } from 'lodash';
 import { Head, usePage } from "@inertiajs/react";
 import { Box, Container, Grid, Table, TableCell, TableRow, Typography, tableCellClasses } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import styles from './Cats.module.css';
+
 import FriendlinessLevel from "@/Components/FriendlinessLevel/FriendlinessLevel";
+import SchedulerButton from "@/Components/SchedulerButton/SchedulerButton";
+import { SyntheticEvent } from "react";
 
 export default function ShowCatPage({ cat }: { cat: Cat }) {
     const { props: { base_url: baseUrl } } = usePage();
@@ -66,7 +69,9 @@ export default function ShowCatPage({ cat }: { cat: Cat }) {
                             <Grid container spacing={1} justifyContent="center">
                                 <Grid item xs={12} md={6}>
                                     <Box sx={{ width: '100%' }}>
-                                        <Typography variant="h5" component="span">Book {cat.name}</Typography></Box>
+                                        <Typography variant="h5" component="span">Book {cat.name}</Typography>
+                                        <SchedulerButton status={ScheduleStatus.Available}>Meow</SchedulerButton>
+                                    </Box>
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -27,3 +27,9 @@ export interface Cat {
     image: string;
     area: string;
 }
+
+export enum ScheduleStatus {
+    Available = 'available',
+    Unavailable = 'unavailable',
+    Selected = 'selected'
+}
