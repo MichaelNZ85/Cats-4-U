@@ -5,7 +5,7 @@ import { Link, usePage } from '@inertiajs/react'
 
 
 
-const Navbar = () => {
+const Navbar: React.FC<{}> = () => {
     // State for managing dropdown visibility∏
     const [dropdownOpen, setDropdownOpen] = useState(false);
 

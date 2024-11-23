@@ -28,8 +28,10 @@ export interface Cat {
     area: string;
 }
 
-export enum ScheduleStatus {
-    Available = 'available',
-    Unavailable = 'unavailable',
-    Selected = 'selected'
+export interface RentalOrder {
+    id: number;
+    cat_id: number;
+    user_id: number;
+    start_time: Date;
+    end_time: Date;
 }

@@ -13,7 +13,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            "@css": path.resolve(__dirname, './resources/css/')
+            "@css": path.resolve(__dirname, './resources/css/'),
         }
     }
 });

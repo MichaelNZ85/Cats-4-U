@@ -10,7 +10,9 @@ class CatService
     public function getAvailableCats()
     {
         return Cat::whereDoesntHave('rentalOrders', function ($query) {
-            return $query->where('end_time', '>=', Carbon::now());
+
+            return $query->where('start_time', '<=', Carbon::now()->subHour())
+                ->where('end_time', '>=', Carbon::now());
         })->get();
     }
 }

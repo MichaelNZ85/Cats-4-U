@@ -2,9 +2,7 @@ import MuiButton, { ButtonProps } from '@mui/material/Button';
 import React, { ReactEventHandler, ReactNode } from 'react';
 import { alpha, darken, styled } from '@mui/material/styles';
 import { getContrastColor } from '@/helpers/ColourHelper';
-import { ScheduleStatus } from '@/types';
-import styles from './SchedulerButton.module.css';
-console.log(styles);
+import { ScheduleStatus } from '@/types/types';
 
 const getColours = (status: ScheduleStatus): { backgroundColour: string, textColour: string } => {
     switch (status) {
@@ -21,7 +19,6 @@ const getColours = (status: ScheduleStatus): { backgroundColour: string, textCol
 
 interface ScheduleButtonProps extends ButtonProps {
     status: ScheduleStatus;
-    onSelect: ReactEventHandler<HTMLButtonElement>;
     children: ReactNode;
 }
 
@@ -45,6 +42,7 @@ const CustomButton = styled(MuiButton)<CustomButtonProps>(({ status }) => {
 const SchedulerButton: React.FC<ScheduleButtonProps> = ({ status, children, ...props }: ScheduleButtonProps) => {
     return (
         <CustomButton
+            size="small"
             status={status}
             {...props}
             sx={{ textTransform: 'none' }}

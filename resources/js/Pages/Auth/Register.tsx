@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ErrorResponse } from '@/types';
 import GuestLayout from '@/Layouts/GuestLayout/GuestLayout';
 import { TextField, Box, Typography } from '@mui/material';
 import { Head, router } from '@inertiajs/react';
 import { useForm } from 'react-hook-form';
 import Button from '@/Components/Button/Button';
-import { LogoCard } from '@/Components/LogoCard/LogoCard';
+import LogoCard from '@/Components/LogoCard/LogoCard';
 
 type RegisterData = {
     email: string,
@@ -17,7 +17,7 @@ type RegisterData = {
 }
 
 
-export default function Register() {
+const Register: React.FC<{}> = () => {
     const {
         register,
         handleSubmit,
@@ -125,3 +125,5 @@ export default function Register() {
         </GuestLayout>
     );
 }
+
+export default Register;

@@ -1,5 +1,6 @@
 import MainLayout from "@/Layouts/MainLayout/MainLayout";
-import { Cat, ScheduleStatus } from "@/types";
+import { ScheduleStatus } from "@/types/types";
+import { Cat } from '@/types';
 import { capitalize } from 'lodash';
 import { Head, usePage } from "@inertiajs/react";
 import { Box, Container, Grid, Table, TableCell, TableRow, Typography, tableCellClasses } from "@mui/material";
@@ -70,7 +71,7 @@ export default function ShowCatPage({ cat }: { cat: Cat }) {
                                 <Grid item xs={12} md={6}>
                                     <Box sx={{ width: '100%' }}>
                                         <Typography variant="h5" component="span">Book {cat.name}</Typography>
-                                        <SchedulerButton status={ScheduleStatus.Available}>Meow</SchedulerButton>
+                                        <SchedulerButton onClick={() => console.log('big purrs')} status={ScheduleStatus.Available}>Meow</SchedulerButton>
                                     </Box>
                                 </Grid>
                             </Grid>

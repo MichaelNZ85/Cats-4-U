@@ -4,7 +4,7 @@ import { TextField, Box, Card, Checkbox, Typography, FormControlLabel, FormGroup
 import { Head, Link, router } from '@inertiajs/react';
 import { useForm } from 'react-hook-form';
 import Button from '@/Components/Button/Button';
-import { LogoCard } from '@/Components/LogoCard/LogoCard';
+import LogoCard from '@/Components/LogoCard/LogoCard';
 
 type LoginData = {
     email: string,
@@ -12,7 +12,11 @@ type LoginData = {
     remember: boolean
 }
 
-export default function Login({ canResetPassword }: { canResetPassword: boolean }) {
+interface LoginProps {
+    canResetPassword: boolean;
+}
+
+const Login: React.FC<LoginProps> = ({ canResetPassword }: LoginProps) => {
     const {
         register,
         handleSubmit,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cat;
 use App\Services\CatService;
+use App\Services\RentalOrderService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -39,10 +40,11 @@ class CatController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cat $cat)
+    public function show(Cat $cat, RentalOrderService $service)
     {
         return Inertia::render('Cats/Show', [
-            'cat' => $cat
+            'cat' => $cat,
+            'rental_orders' => $service->getRentalOrdersForCat($cat)
         ]);
     }
 

@@ -6,7 +6,7 @@ interface LogoCardProps {
     children: ReactNode;
 }
 
-export const LogoCard: React.FC<LogoCardProps> = ({ children }: LogoCardProps) => {
+const LogoCard: React.FC<LogoCardProps> = ({ children }: LogoCardProps) => {
     return (
         <Card sx={{ minWidth: '300px', padding: 3 }}>
 
@@ -17,3 +17,5 @@ export const LogoCard: React.FC<LogoCardProps> = ({ children }: LogoCardProps) =
         </Card>
     )
 }
+
+export default LogoCard;
